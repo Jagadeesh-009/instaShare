@@ -86,15 +86,12 @@ class UserStories extends Component {
     const response = await fetch(userStoriesApiUrl, options)
     if (response.ok === true) {
       const fetchedData = await response.json()
-      //   console.log('Fetched Data', fetchedData)
 
       const updatedData = await fetchedData.users_stories.map(userStory => ({
         storyUrl: userStory.story_url,
         userId: userStory.user_id,
         userName: userStory.user_name,
       }))
-
-      //   console.log('updatedData', updatedData)
 
       this.setState({
         userStories: updatedData,
@@ -110,7 +107,7 @@ class UserStories extends Component {
   }
 
   renderLoadingView = () => (
-    <div className="main-container">
+    <div className="main-container" data-testId="loader">
       <LoaderSpinner />
     </div>
   )
@@ -125,7 +122,7 @@ class UserStories extends Component {
             const {userId, storyUrl, userName} = eachLogo
             return (
               <div className="slick-item" key={userId}>
-                <img className="logo-image" src={storyUrl} alt={userName} />
+                <img className="logo-image" src={storyUrl} alt="user story" />
                 <p className="user-story-name">{userName}</p>
               </div>
             )

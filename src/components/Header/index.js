@@ -2,6 +2,8 @@ import {Component} from 'react'
 
 import Cookies from 'js-cookie'
 
+import {FaSearch} from 'react-icons/fa'
+
 import {Link, withRouter} from 'react-router-dom'
 
 import './index.css'
@@ -37,6 +39,10 @@ class Header extends Component {
               />
             </Link>
             <h1 className="nav-heading">Insta Share</h1>
+          </div>
+          <input placeholder="Search Caption" type="search" />
+          <div data-testId="searchIcon">
+            <FaSearch />
           </div>
         </nav>
 

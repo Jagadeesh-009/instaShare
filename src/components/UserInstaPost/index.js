@@ -83,7 +83,7 @@ class UserInstaPost extends Component {
                 type="button"
                 onClick={this.toggleLike}
                 className="user-post-button"
-                // data-testid="likeIcon"
+                data-testId="likeIcon"
               >
                 <BsHeart size={20} color="#262626" />
               </button>

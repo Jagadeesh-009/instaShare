@@ -64,7 +64,11 @@ class UserPosts extends Component {
     }
   }
 
-  renderLoadingView = () => <LoaderSpinner />
+  renderLoadingView = () => (
+    <div data-testId="loader">
+      <LoaderSpinner />
+    </div>
+  )
 
   onClickTryAgainButton = () => {
     this.getUserPosts()
@@ -76,9 +80,9 @@ class UserPosts extends Component {
         src="https://res.cloudinary.com/dvmp5vgbm/image/upload/v1662435108/InstaShare/SomethingWentWrong_glggye.png"
         alt="failure view"
       />
-      <h1 className="failure-view-heading">
+      <p className="failure-view-heading">
         Something went wrong. Please try again.
-      </h1>
+      </p>
       <button
         type="button"
         onClick={this.onClickTryAgainButton}
