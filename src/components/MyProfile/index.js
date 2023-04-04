@@ -93,7 +93,7 @@ class MyProfile extends Component {
         onClick={this.onClickTryAgainButton}
         className="failure-view-retry-button"
       >
-        Try Again
+        Try again
       </button>
     </div>
   )

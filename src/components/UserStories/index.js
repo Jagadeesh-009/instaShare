@@ -97,9 +97,7 @@ class UserStories extends Component {
         userStories: updatedData,
         apiStatus: apiStatusConstants.success,
       })
-    }
-
-    if (response.status === 401) {
+    } else {
       this.setState({
         apiStatus: apiStatusConstants.failure,
       })
@@ -139,7 +137,7 @@ class UserStories extends Component {
   renderFailureView = () => (
     <div className="main-container">
       <h1>Failure View</h1>
-      <button type="button">Retry</button>
+      <button type="button">Try again</button>
     </div>
   )
 

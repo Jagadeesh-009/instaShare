@@ -57,9 +57,7 @@ class UserPosts extends Component {
         apiStatus: apiStatusConstants.success,
         userPosts: updatedData,
       })
-    }
-
-    if (response.status === 401) {
+    } else {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
   }
