@@ -8,13 +8,17 @@ import './index.css'
 class Home extends Component {
   render() {
     return (
-      <>
-        <Header />
-        <div className="home-container">
+      <ul>
+        <li>
+          <Header />
+        </li>
+        <li>
           <UserStories />
+        </li>
+        <li>
           <UserPosts />
-        </div>
-      </>
+        </li>
+      </ul>
     )
   }
 }

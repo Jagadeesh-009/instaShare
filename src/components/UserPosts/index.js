@@ -63,7 +63,7 @@ class UserPosts extends Component {
   }
 
   renderLoadingView = () => (
-    <div data-testId="loader">
+    <div testid="loader">
       <LoaderSpinner />
     </div>
   )

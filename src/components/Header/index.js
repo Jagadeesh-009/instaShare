@@ -41,21 +41,26 @@ class Header extends Component {
             <h1 className="nav-heading">Insta Share</h1>
           </div>
           <input placeholder="Search Caption" type="search" />
-          <button type="button" data-testId="searchIcon">
+          <button type="button" testid="searchIcon">
             <FaSearch />
           </button>
         </nav>
 
         <div className="home-menu-container">
-          <div className="list-items-section">
-            <Link to="/">
-              <p className="list-item">Home</p>
-            </Link>
-
-            <p className="list-item">Search</p>
-            <Link to="/my-profile">
-              <p className="list-item">Profile</p>
-            </Link>
+          <ul className="list-items-section">
+            <li>
+              <Link to="/">
+                <p className="list-item">Home</p>
+              </Link>
+            </li>
+            <li>
+              <p className="list-item">Search</p>
+            </li>
+            <li>
+              <Link to="/my-profile">
+                <p className="list-item">Profile</p>
+              </Link>
+            </li>
 
             <button
               type="button"
@@ -64,7 +69,7 @@ class Header extends Component {
             >
               Logout
             </button>
-          </div>
+          </ul>
           <button
             type="button"
             className="menu-close-button"
