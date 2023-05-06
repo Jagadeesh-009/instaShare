@@ -159,10 +159,6 @@ class UserProfile extends Component {
             </div>
 
             <div className="desktop-user-details">
-              <h1 className="desktop-user-name-heading">
-                {userProfileData.userName}
-              </h1>
-
               <div className="desktop-user-stats-container">
                 <p className="stats-type">
                   <span className="stats-numbers">

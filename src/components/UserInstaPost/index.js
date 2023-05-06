@@ -17,9 +17,12 @@ class UserInstaPost extends Component {
     isLiked: false,
   }
 
-  toggleLike = async () => {
+  liking = async () => {
     await this.setState(prevState => ({isLiked: !prevState.isLiked}))
+    this.toggleLike()
+  }
 
+  toggleLike = async () => {
     const {userPost} = this.props
     const {postId} = userPost
     const {isLiked} = this.state
@@ -81,7 +84,7 @@ class UserInstaPost extends Component {
             {!isLiked && (
               <button
                 type="button"
-                onClick={this.toggleLike}
+                onClick={this.liking}
                 className="user-post-button"
                 testid="likeIcon"
               >
@@ -91,7 +94,7 @@ class UserInstaPost extends Component {
             {isLiked && (
               <button
                 type="button"
-                onClick={this.toggleLike}
+                onClick={this.liking}
                 className="user-post-button"
               >
                 <BsHeartFill size={20} color="red" />
