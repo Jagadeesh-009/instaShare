@@ -148,21 +148,6 @@ class MyProfile extends Component {
               className="user-profile-pic"
             />
 
-            <div className="mobile-user-stats-container">
-              <div className="stats-heading-desc">
-                <span className="user-stats-heading">{postsCount}</span>
-                <span className="user-stats-description">posts</span>
-              </div>
-              <div className="stats-heading-desc">
-                <span className="user-stats-heading">{followersCount}</span>
-                <span className="user-stats-description">followers</span>
-              </div>
-              <div className="stats-heading-desc">
-                <span className="user-stats-heading">{followingCount}</span>
-                <span className="user-stats-description">following</span>
-              </div>
-            </div>
-
             <div className="desktop-user-details">
               <h1 className="desktop-user-name-heading">{userName}</h1>
 
