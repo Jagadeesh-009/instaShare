@@ -46,7 +46,6 @@ class MyProfile extends Component {
 
     if (response.ok) {
       const data = await response.json()
-      console.log(data)
 
       const formattedData = {
         followersCount: data.profile.followers_count,
@@ -64,6 +63,10 @@ class MyProfile extends Component {
       this.setState({
         myProfileData: formattedData,
         apiStatus: apiStatusConstants.success,
+      })
+    } else {
+      this.setState({
+        apiStatus: apiStatusConstants.failure,
       })
     }
   }

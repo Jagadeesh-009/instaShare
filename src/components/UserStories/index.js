@@ -134,10 +134,20 @@ class UserStories extends Component {
     <div className="main-container">{this.renderSlider()}</div>
   )
 
+  onClickTryAgainButton = () => this.getUserStories()
+
   renderFailureView = () => (
     <div className="main-container">
       <h1>Failure View</h1>
-      <button type="button">Try again</button>
+      <p>Something went wrong. Please try again</p>
+      <img
+        src="https://res.cloudinary.com/dvmp5vgbm/image/upload/v1662435108/InstaShare/SomethingWentWrong_glggye.png"
+        alt="failure view"
+        className="failure-view-image"
+      />
+      <button type="button" onClick={this.onClickTryAgainButton}>
+        Try again
+      </button>
     </div>
   )
 

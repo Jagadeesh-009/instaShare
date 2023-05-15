@@ -65,6 +65,10 @@ class UserProfile extends Component {
         userProfileData: formattedData,
         apiStatus: apiStatusConstants.success,
       })
+    } else {
+      this.setState({
+        apiStatus: apiStatusConstants.failure,
+      })
     }
   }
 
