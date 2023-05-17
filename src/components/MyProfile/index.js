@@ -78,7 +78,7 @@ class MyProfile extends Component {
   )
 
   onClickTryAgainButton = () => {
-    this.getUserProfileDetails()
+    this.getMyProfileDetails()
   }
 
   renderFailureView = () => (
@@ -146,7 +146,7 @@ class MyProfile extends Component {
           <div className="user-profile-pic-and-stats-container">
             <img
               src={profilePic}
-              alt="user profile"
+              alt="my profile"
               className="user-profile-pic"
             />
 
@@ -179,7 +179,7 @@ class MyProfile extends Component {
                   <div className="story-image-container">
                     <img
                       src={story.image}
-                      alt="user story"
+                      alt="my story"
                       className="story-image"
                     />
                   </div>
