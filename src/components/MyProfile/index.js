@@ -143,7 +143,6 @@ class MyProfile extends Component {
     return (
       <div className="user-profile-success-view-container">
         <div className="user-details-section">
-          <h1 className="mobile-user-name">{userName}</h1>
           <div className="user-profile-pic-and-stats-container">
             <img
               src={profilePic}
@@ -172,10 +171,7 @@ class MyProfile extends Component {
               <p className="user-bio">{userBio}</p>
             </div>
           </div>
-          <div className="user-id-bio-container">
-            <p className="user-id">{userId}</p>
-            <p className="user-bio">{userBio}</p>
-          </div>
+
           <div className="user-stories-container">
             <ul className="stories-list-container">
               {stories.map(story => (
