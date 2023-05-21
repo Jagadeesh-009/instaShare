@@ -73,7 +73,10 @@ class UserProfile extends Component {
   }
 
   renderLoadingView = () => (
-    <div className="loading-view-container" testid="loader">
+    <div
+      className="loading-view-container"
+      // testid="loader"
+    >
       <LoaderSpinner />
     </div>
   )

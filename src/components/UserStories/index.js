@@ -105,7 +105,10 @@ class UserStories extends Component {
   }
 
   renderLoadingView = () => (
-    <div className="main-container" testid="loader">
+    <div
+      className="main-container"
+      // testid="loader"
+    >
       <LoaderSpinner />
     </div>
   )

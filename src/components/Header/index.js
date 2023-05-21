@@ -41,7 +41,10 @@ class Header extends Component {
             <h1 className="nav-heading">Insta Share</h1>
           </div>
           <input placeholder="Search Caption" type="search" />
-          <button type="button" testid="searchIcon">
+          <button
+            type="button"
+            // testid="searchIcon"
+          >
             <FaSearch />
           </button>
         </nav>
@@ -54,7 +57,9 @@ class Header extends Component {
               </Link>
             </li>
             <li>
-              <p className="list-item">Search</p>
+              <Link to="/search">
+                <p className="list-item">Search</p>
+              </Link>
             </li>
             <li>
               <Link to="/my-profile">
