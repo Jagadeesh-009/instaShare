@@ -1,12 +1,11 @@
+/* eslint-disable react/no-unknown-property */
 import {Component} from 'react'
+import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
-
 import {BsGrid3X3} from 'react-icons/bs'
 import {BiCamera} from 'react-icons/bi'
-
-import './index.css'
-import LoaderSpinner from '../LoaderSpinner'
 import Header from '../Header'
+import './index.css'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -15,40 +14,32 @@ const apiStatusConstants = {
   inProgress: 'IN_PROGRESS',
 }
 
-class UserProfile extends Component {
-  state = {
-    apiStatus: apiStatusConstants.initial,
-    userProfileData: [],
-  }
+class MyProfile extends Component {
+  state = {apiStatus: apiStatusConstants.initial, myProfileData: []}
 
   componentDidMount() {
-    this.getUserProfileDetails()
+    this.getUserProfileData()
   }
 
-  getUserProfileDetails = async () => {
-    this.setState({apiStatus: apiStatusConstants.inProgress})
-
+  getUserProfileData = async () => {
     const {match} = this.props
     const {params} = match
-    const {userId} = params
-
+    const {id} = params
+    console.log(match)
+    this.setState({apiStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
-
-    const userProfileUrl = `https://apis.ccbp.in/insta-share/users/${userId}`
+    const apiUrl = `https://apis.ccbp.in/insta-share/users/${id}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
       method: 'GET',
     }
-
-    const response = await fetch(userProfileUrl, options)
-
-    if (response.ok) {
+    const response = await fetch(apiUrl, options)
+    if (response.ok === true) {
       const data = await response.json()
-      console.log(data)
-
-      const formattedData = {
+      console.log(data.user_details)
+      const updatedData = {
         followersCount: data.user_details.followers_count,
         followingCount: data.user_details.following_count,
         id: data.user_details.id,
@@ -56,160 +47,128 @@ class UserProfile extends Component {
         postsCount: data.user_details.posts_count,
         profilePic: data.user_details.profile_pic,
         stories: data.user_details.stories,
-        userBio: data.user_details.user_bio,
         userId: data.user_details.user_id,
         userName: data.user_details.user_name,
+        userBio: data.user_details.user_bio,
       }
-
+      console.log(updatedData)
       this.setState({
-        userProfileData: formattedData,
+        myProfileData: updatedData,
         apiStatus: apiStatusConstants.success,
       })
     } else {
-      this.setState({
-        apiStatus: apiStatusConstants.failure,
-      })
+      this.setState({apiStatus: apiStatusConstants.failure})
     }
   }
 
+  renderSuccessView = () => {
+    const {myProfileData} = this.state
+    const {
+      followersCount,
+      followingCount,
+      id,
+      userBio,
+      userId,
+      userName,
+      stories,
+      posts,
+      postsCount,
+      profilePic,
+    } = myProfileData
+    return (
+      <div className="main_container">
+        <div className="user_profile_large_container">
+          <img src={profilePic} alt="user profile" className="userProfilePic" />
+          <div className="user_profile_div">
+            <h1 className="userProfileName">{userName}</h1>
+            <div className="count_div">
+              <p className="text">
+                <span className="count">{postsCount} </span>
+                posts
+              </p>
+              <p className="text">
+                <span className="count">{followersCount} </span>
+                followers
+              </p>
+              <p className="text">
+                <span className="count">{followingCount} </span>
+                following
+              </p>
+            </div>
+            <p className="user_profile_user_id">{userId}</p>
+            <p className="user_profile_bioText">{userBio}</p>
+          </div>
+        </div>
+        <ul className="user_profile_stories_container">
+          {stories.map(eachStory => (
+            <li key={eachStory.id}>
+              <img
+                src={eachStory.image}
+                alt="user story"
+                className="storyImg"
+              />
+            </li>
+          ))}
+        </ul>
+        <div className="posts_heading_div">
+          <BsGrid3X3 className="gridIcon" />
+          <h1 className="posts_heading">Posts</h1>
+        </div>
+        {posts.length > 0 ? (
+          <ul className="user_profile_posts_container">
+            {posts.map(eachPost => (
+              <li key={eachPost.id}>
+                <img
+                  src={eachPost.image}
+                  alt="user post"
+                  className="user_profile_post"
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="user_profile_no_post_div">
+            <BiCamera className="cameraIcon" />
+            <h1 className="no_posts_heading">No Posts Yet</h1>
+          </div>
+        )}
+      </div>
+    )
+  }
+
   renderLoadingView = () => (
-    <div
-      className="loading-view-container"
-      // testid="loader"
-    >
-      <LoaderSpinner />
+    <div className="user-story-loader-container" testid="loader">
+      <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
     </div>
   )
 
-  onClickTryAgainButton = () => {
-    this.getUserProfileDetails()
-  }
-
   renderFailureView = () => (
-    <div className="failure-view-container">
+    <div className="failure_view_container">
       <img
-        src="https://res.cloudinary.com/dvmp5vgbm/image/upload/v1662435108/InstaShare/SomethingWentWrong_glggye.png"
+        className="user_profile_failure_img"
+        src="https://res.cloudinary.com/dziwdneks/image/upload/v1675454266/HomeFaillureImg_qz05si.png"
         alt="failure view"
-        className="failure-view-image"
       />
-      <p className="failure-view-heading">
-        Something went wrong. Please try again
-      </p>
+      <p className="failure_heading">Something went wrong. Please try again</p>
       <button
-        type="button"
-        onClick={this.onClickTryAgainButton}
-        className="failure-view-retry-button"
+        onClick={() => this.getUserProfileData()}
+        type="submit"
+        className="failure-button"
       >
-        Try Again
+        Try again
       </button>
     </div>
   )
 
-  renderNoPostsView = () => (
-    <div className="no-posts-container">
-      <div className="camera-container">
-        <BiCamera size={30} className="camera-icon" />
-      </div>
-      <h1 className="no-posts-heading">No Posts Yet</h1>
-    </div>
-  )
-
-  renderPostsView = () => {
-    const {userProfileData} = this.state
-
-    return (
-      <div>
-        <ul className="posts-view-container">
-          {userProfileData.posts.map(post => (
-            <li className="post-image-list-item" key={post.id}>
-              <img src={post.image} alt="user post" className="post-image" />
-            </li>
-          ))}
-        </ul>
-      </div>
-    )
-  }
-
-  renderSuccessView = () => {
-    const {userProfileData} = this.state
-
-    return (
-      <div className="user-profile-success-view-container">
-        <div className="user-details-section">
-          <h1 className="mobile-user-name">{userProfileData.userName}</h1>
-          <div className="user-profile-pic-and-stats-container">
-            <img
-              src={userProfileData.profilePic}
-              alt="user profile"
-              className="user-profile-pic"
-            />
-
-            <div className="desktop-user-details">
-              <div className="desktop-user-stats-container">
-                <p className="stats-type">
-                  <span className="stats-numbers">
-                    {userProfileData.postsCount}
-                  </span>{' '}
-                  posts
-                </p>
-                <p className="stats-type">
-                  <span className="stats-numbers">
-                    {userProfileData.followersCount}
-                  </span>{' '}
-                  followers
-                </p>
-                <p className="stats-type">
-                  <span className="stats-numbers">
-                    {userProfileData.followingCount}
-                  </span>{' '}
-                  following
-                </p>
-              </div>
-
-              <p className="user-id">{userProfileData.userId}</p>
-              <p className="user-bio">{userProfileData.userBio}</p>
-            </div>
-          </div>
-          <div className="user-stories-container">
-            <ul className="stories-list-container">
-              {userProfileData.stories.map(story => (
-                <li key={story.id} className="story-item">
-                  <div className="story-image-container">
-                    <img
-                      src={story.image}
-                      alt="user story"
-                      className="story-image"
-                    />
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <hr className="divider-line" />
-        <div className="user-profile-posts-section">
-          <div className="posts-icon-and-heading-container">
-            <BsGrid3X3 className="posts-grid-icon" />
-            <h1 className="posts-heading">Posts</h1>
-          </div>
-          {userProfileData.posts.length === 0
-            ? this.renderNoPostsView()
-            : this.renderPostsView()}
-        </div>
-      </div>
-    )
-  }
-
-  renderUserProfileView = () => {
+  renderUserProfile = () => {
     const {apiStatus} = this.state
-
     switch (apiStatus) {
       case apiStatusConstants.inProgress:
         return this.renderLoadingView()
-      case apiStatusConstants.success:
-        return this.renderSuccessView()
       case apiStatusConstants.failure:
         return this.renderFailureView()
+      case apiStatusConstants.success:
+        return this.renderSuccessView()
       default:
         return null
     }
@@ -217,14 +176,11 @@ class UserProfile extends Component {
 
   render() {
     return (
-      <>
+      <div className="my_profile_container">
         <Header />
-        <div className="user-profile-container">
-          {this.renderUserProfileView()}
-        </div>
-      </>
+        {this.renderUserProfile()}
+      </div>
     )
   }
 }
-
-export default UserProfile
+export default MyProfile

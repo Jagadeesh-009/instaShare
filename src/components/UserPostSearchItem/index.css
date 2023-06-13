@@ -61,6 +61,9 @@
   .icon {
     font-size: 23px;
   }
+  .likeIcon {
+    font-size: 28px;
+  }
 
   .likes {
     font-style: normal;
@@ -308,6 +311,10 @@
   }
   .icon {
     font-size: 20px;
+  }
+
+  .likeIcon {
+    font-size: 21px;
   }
 
   .searchResultsHeading {

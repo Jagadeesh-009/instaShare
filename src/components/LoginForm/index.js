@@ -1,7 +1,6 @@
 import {Component} from 'react'
-import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
-
+import Cookies from 'js-cookie'
 import './index.css'
 
 class LoginForm extends Component {
@@ -65,7 +64,7 @@ class LoginForm extends Component {
           className="password-input-field"
           value={password}
           onChange={this.onChangePassword}
-          placeholder="Password"
+          placeholder="Password:rahul@2021"
         />
       </>
     )
@@ -84,7 +83,7 @@ class LoginForm extends Component {
           className="username-input-field"
           value={username}
           onChange={this.onChangeUsername}
-          placeholder="Username"
+          placeholder="Username:rahul"
         />
       </>
     )
@@ -97,27 +96,26 @@ class LoginForm extends Component {
       return <Redirect to="/" />
     }
     return (
-      <div className="login-form-container">
+      <div className="login-container">
         <img
-          src="https://res.cloudinary.com/dvmp5vgbm/image/upload/v1648487014/InstaShare/desktop_ebabom.png"
-          className="login-image"
+          src="https://res.cloudinary.com/dziwdneks/image/upload/v1675418435/login_img_poyp5d.png"
+          className="login-website-desktop-img"
           alt="website login"
         />
+
         <form className="form-container" onSubmit={this.submitForm}>
           <img
-            src="https://res.cloudinary.com/dvmp5vgbm/image/upload/v1648487013/InstaShare/mobilelogin_htwkhc.png"
-            className="login-website-logo-desktop-image"
+            src="https://res.cloudinary.com/dziwdneks/image/upload/v1675419223/login_icon_ekrs85.png"
+            className="login-website-logo-image"
             alt="website logo"
           />
-          <h1 className="login-form-heading">Insta Share</h1>
+          <h1 className="website-title">Insta Share</h1>
           <div className="input-container">{this.renderUsernameField()}</div>
           <div className="input-container">{this.renderPasswordField()}</div>
-
-          {showSubmitError && <p className="error-message">{errorMsg}</p>}
-
           <button type="submit" className="login-button">
             Login
           </button>
+          {showSubmitError && <p className="error-message">*{errorMsg}</p>}
         </form>
       </div>
     )
